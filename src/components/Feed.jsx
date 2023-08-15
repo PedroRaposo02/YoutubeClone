@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Box, Stack, Typography } from '@mui/material';
 
+
 import { fetchFromApi } from '../utils/fetchFromApi';
 import { Sidebar, Videos } from './';
+
 
 
 const Feed = () => {
@@ -11,30 +13,33 @@ const Feed = () => {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
-    fetchFromApi(`search?part=snippet&q=${selectedCategory}`)
+    fetchFromApi(`search?part=snippet&q=${selectedCategory}`, null)
       .then((data) => {
+        console.log(data);
         setVideos(data.items);
       });
   }, [selectedCategory]);
 
   return (
     <Stack sx={{
-      flexDirection: { sx: "column", md: "row" }
+      flexDirection: { xs: "column", md: "row" }
     }}>
       <Box sx={{
         height: {
-          sx: "auto",
+          xs: "auto",
           md: "89vh"
         }, borderRight: '1px solid #3d3d3d',
-        px: { sx: 0, md: 2 },
+        px: { xs: 0, md: 2 },
       }}>
-        <Sidebar 
+        <Sidebar
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
         />
         <Typography className='copyright' variant='body2' sx={{
           mt: 1.5, color: '#fff', textAlign: 'center', fontSize: '0.8rem'
-        }}>Copyright 2022 Pedro Raposo</Typography>
+          }}>
+          Copyright 2022 Pedro Raposo
+        </Typography>
       </Box>
       <Box sx={{
         p: 2,
@@ -55,7 +60,7 @@ const Feed = () => {
           </span>
         </Typography>
 
-        <Videos videos={videos}/>
+        <Videos videos={videos} />
       </Box>
     </Stack>
   );

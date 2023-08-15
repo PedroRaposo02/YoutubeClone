@@ -14,9 +14,10 @@ const options = {
     }
 };
 
-export const fetchFromApi = async (url) => {
+export const fetchFromApi = async (url, moreOptions) => {
     try {
-        const { data } = await axios.get(`${BASE_URL}${url}`, options);
+        const mergedOptions = { ...options, ...moreOptions}
+        const { data } = await axios.get(`${BASE_URL}${url}`, mergedOptions);
 
         return data;
     }
