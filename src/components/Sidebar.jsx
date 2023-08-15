@@ -3,7 +3,7 @@ import { Stack } from "@mui/material";
 
 import { categories } from "../utils/constants";
 
-const Sidebar = ({ selectedCategory, setSelectedCategory }) => {
+const Sidebar = ({ selectedCategory, setSelectedCategory, handleCategoryChange }) => {
     
     const [hoveredIndex, setHoveredIndex] = useState(null);
 
@@ -23,7 +23,10 @@ const Sidebar = ({ selectedCategory, setSelectedCategory }) => {
                     color: "white",
                 }}
                 onClick={
-                    () => setSelectedCategory(category.name)
+                    () => {
+                        setSelectedCategory(category.name);
+                        handleCategoryChange(category.name);
+                    }
                 }
                 onMouseEnter={
                     () => setHoveredIndex(index)

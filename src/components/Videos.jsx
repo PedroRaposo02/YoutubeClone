@@ -25,7 +25,10 @@ const Videos = ({ videos }) => {
         <Box key={idx} flex={1} maxWidth={{
           md: 550,
           xs: 450
-        }} minWidth={358}>
+        }} minWidth={{
+          md: 358,
+          xs: 450
+        }}>
           {item.id.videoId && <FeedCard id={item.id.videoId} snippet={item.snippet} type={'video'} />}
           {item.id.channelId && <ChannelCard channelDetail={item} />}
           {item.id.playlistId && <FeedCard id={item.id.playlistId} snippet={item.snippet} type={'playlist'} />}

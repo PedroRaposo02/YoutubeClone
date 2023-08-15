@@ -16,9 +16,17 @@ const options = {
 
 export const fetchFromApi = async (url, moreOptions) => {
     try {
-        const mergedOptions = { ...options, ...moreOptions}
+        const mergedOptions = {
+            ...options,
+            ...moreOptions,
+            params: {
+                ...options.params,
+                ...(moreOptions.params || {}),
+            }
+        }
+        console.log(mergedOptions);
         const { data } = await axios.get(`${BASE_URL}${url}`, mergedOptions);
-
+        console.log(data);
         return data;
     }
     catch (error) {

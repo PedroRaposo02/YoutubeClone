@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Box, Stack, Typography } from '@mui/material';
 
+import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { fetchFromApi } from '../utils/fetchFromApi';
 import { Sidebar, Videos } from './';
@@ -9,15 +11,51 @@ import { Sidebar, Videos } from './';
 
 const Feed = () => {
 
-  const [selectedCategory, setSelectedCategory] = useState('New');
+  const [selectedCategory, setSelectedCategory] = useState('');
   const [videos, setVideos] = useState([]);
+  const { category } = useParams();
+  const route = useNavigate();
+
+  const handleCategoryChange = (category) => {
+    if (category === 'New' || category === '') {
+      route('/');
+    }
+    else {
+      route(`/${category}`);
+    }
+  }
+
+  console.log(category);
+
+  // Set the selectedCategory based on the URL parameter
+  useEffect(() => {
+    if (category) {
+      setSelectedCategory(category);
+    } else {
+      setSelectedCategory('New');
+    }
+  }, [category]);
 
   useEffect(() => {
-    fetchFromApi(`search?part=snippet&q=${selectedCategory}`, null)
-      .then((data) => {
-        console.log(data);
-        setVideos(data.items);
-      });
+
+    const cachedVideos = localStorage.getItem(selectedCategory);
+    if (cachedVideos) {
+      setVideos(JSON.parse(cachedVideos));
+    }
+    else {
+      const additionalOptions = {
+        params: {
+          part: 'snippet',
+          q: selectedCategory,
+        }
+      };
+      fetchFromApi('search', additionalOptions)
+        .then((data) => {
+          setVideos(data.items);
+          localStorage.setItem(selectedCategory, JSON.stringify(data.items));
+        });
+    }
+
   }, [selectedCategory]);
 
   return (
@@ -34,10 +72,11 @@ const Feed = () => {
         <Sidebar
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
+          handleCategoryChange={handleCategoryChange}
         />
         <Typography className='copyright' variant='body2' sx={{
           mt: 1.5, color: '#fff', textAlign: 'center', fontSize: '0.8rem'
-          }}>
+        }}>
           Copyright 2022 Pedro Raposo
         </Typography>
       </Box>
