@@ -22,7 +22,7 @@ const FeedCard = ({ id, snippet, type }) => {
         <Card
             width={'100%'}
             sx={{
-            borderRadius: 1, backgroundColor: '#1e1e1e', color: 'white', mb: '10px', '&:hover': { boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.75)'}
+            borderRadius: 3, backgroundColor: '#1e1e1e', color: 'white', mb: '10px', '&:hover': { boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.75)'}
         }}>
             <Link to={id ? `/${typeOfMedia}/${id}` : demoVideoUrl}>
                 <CardMedia

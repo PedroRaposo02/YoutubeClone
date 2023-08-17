@@ -45,14 +45,14 @@ const Feed = () => {
     else {
       const additionalOptions = {
         params: {
-          part: 'snippet',
+          part: 'snippet,statistics',
           q: selectedCategory,
         }
       };
       fetchFromApi('search', additionalOptions)
         .then((data) => {
           setVideos(data.items);
-          localStorage.setItem(selectedCategory, JSON.stringify(data.items));
+          localStorage.setItem(selectedCategory, JSON.stringify(data?.items));
         });
     }
 
