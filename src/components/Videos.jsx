@@ -4,6 +4,7 @@ import React from 'react';
 import { ChannelCard, FeedCard } from './';
 
 const Videos = ({ videos }) => {
+  console.log(videos)
   return (
     <Stack
       direction={{
@@ -13,11 +14,11 @@ const Videos = ({ videos }) => {
       flexWrap={"wrap"}
       justifyContent={{
         xs: "center",
-        md: "flex-start"	
+        md: "space-between"	
       }}
       alignItems={{
         xs: "center",
-        md: "flex-start"
+        md: 'center'
       }}
       gap={2}
     >

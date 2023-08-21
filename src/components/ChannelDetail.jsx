@@ -36,7 +36,7 @@ const ChannelDetail = () => {
 
   return (
     <Box minHeight={'95vh'}>
-      <Box sx={{
+      <Box mb={'200px'} sx={{
         background: 'linear-gradient(90deg, rgba(21, 244, 255, 0.9954441913439636) 0%, rgba(242, 0, 255, 1) 100%)',
           height: '300px',
           display: 'flex',
@@ -49,10 +49,8 @@ const ChannelDetail = () => {
           {channelDetail && <ChannelCard channelDetail={channelDetail}  />}
         </Box>
       </Box>
-      <Box display={'flex'} p='2'>
-        <Box sx={{
-          mr: { sm: '100px' }
-        }}>
+      <Box display={'flex'} justifyContent={'center'} p='2'>
+        <Box display='flex' justifyContent={'center'} mx={2}>
           {videos && <Videos videos={videos} />}
         </Box>
 

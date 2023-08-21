@@ -13,7 +13,7 @@ const Feed = () => {
 
   const [selectedCategory, setSelectedCategory] = useState('');
   const [videos, setVideos] = useState([]);
-  const { category } = useParams();
+  const { params } = useParams();
   const route = useNavigate();
 
   const handleCategoryChange = (category) => {
@@ -25,16 +25,16 @@ const Feed = () => {
     }
   }
 
-  console.log(category);
+  console.log(params);
 
   // Set the selectedCategory based on the URL parameter
   useEffect(() => {
-    if (category) {
-      setSelectedCategory(category);
+    if (params) {
+      setSelectedCategory(params);
     } else {
       setSelectedCategory('New');
     }
-  }, [category]);
+  }, [params]);
 
   useEffect(() => {
 
@@ -57,6 +57,7 @@ const Feed = () => {
     }
 
   }, [selectedCategory]);
+
 
   return (
     <Stack sx={{

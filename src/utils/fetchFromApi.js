@@ -23,10 +23,8 @@ export const fetchFromApi = async (url, moreOptions) => {
                 ...options.params,
                 ...(moreOptions.params || {}),
             }
-        }
-        console.log(mergedOptions);
+        };
         const { data } = await axios.get(`${BASE_URL}${url}`, mergedOptions);
-        console.log(data);
         return data;
     }
     catch (error) {
